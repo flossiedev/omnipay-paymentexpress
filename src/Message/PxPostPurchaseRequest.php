@@ -36,11 +36,41 @@ class PxPostPurchaseRequest extends PxPostAuthorizeRequest
         return $this->setParameter('enableAddBillCard', $value);
     }   
 
+    /** 
+     * Get the PxPost MerchantReference
+     *
+     * Optional string value to allow merchant to attach their own reference
+     * to the transaction.
+     *
+     * @return mixed
+     */
+    public function getMerchantReference()
+    {   
+        if (is_null($this->getParameter('merchantReference')))
+          return false;
+
+        return $this->getParameter('merchantReference');
+    }   
+
+    /** 
+     * Set the PxPost MerchantReference
+     *
+     * @param bool $value
+     * @return $this
+     */
+    public function setMerchantReference($value)
+    {   
+        return $this->setParameter('merchantReference', $value);
+    }   
+
     public function getData()
     {
         $data = parent::getData();
 
         $data->EnableAddBillCard = ($this->getEnableAddBillCard()) ? 1 : 0;
+
+        if ($this->getMerchantReference())
+          $data->MerchantReference = $this->getMerchantReference();
 
         return $data;
     }
