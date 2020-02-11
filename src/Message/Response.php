@@ -37,10 +37,10 @@ class Response extends AbstractResponse
 
     public function getMessage()
     {
-        if (isset($this->data->HelpText)) {
+        return (string) $this->data->ResponseText;
+
+/*        if (isset($this->data->HelpText)) {
             return (string) $this->data->HelpText;
-        } else {
-            return (string) $this->data->ResponseText;
-        }
+        } */
     }
 }
